@@ -284,21 +284,22 @@ const MENU = [
           ru:"Булочка, говяжья сосиска, чеддер, айсберг, горчица, кетчуп, белый соус"}},
 
   // ===== DRINKS =====
-  { type:"item", cat:"drinks", img:"РАЗЛИВНЫЕ НАПИТКИ.JPG", id:"ayran",
-    name:{kz:"Айран 0,3",ru:"Айран 0,3"}, price:390, desc:{kz:"",ru:""}},
-  { type:"item", cat:"drinks", img:"ПЕПСИ.JPG", id:"pepsi-05",
-    name:{kz:"Pepsi 0,5",ru:"Pepsi 0,5"}, price:690, desc:{kz:"Бөтелке",ru:"Бутылка"}},
-  { type:"item", cat:"drinks", img:"ПЕПСИ.JPG", id:"pepsi-1",
-    name:{kz:"Pepsi 1 л",ru:"Pepsi 1 л"}, price:890, desc:{kz:"",ru:""}},
-  { type:"item", cat:"drinks", img:"ПЕПСИ.JPG", id:"lipton",
-    name:{kz:"Lipton 1 л",ru:"Lipton 1 л"}, price:890, desc:{kz:"",ru:""}},
-  { type:"list", cat:"drinks",
-    title:{kz:"Құйма сусындар 0,5",ru:"Разливные напитки 0,5"},
+  // Pepsi — өз фотосымен, екі көлемде
+  { type:"item", cat:"drinks", img:"ПЕПСИ.JPG", id:"pepsi",
+    name:{kz:"Pepsi",ru:"Pepsi"},
+    desc:{kz:"Классикалық дәм",ru:"Классический вкус"},
+    sizes:[ {label:"0,5 л", price:690}, {label:"1 л", price:890} ] },
+
+  // Қалған сусындар — Dailizza ыдысының фотосымен group
+  { type:"group", cat:"drinks", img:"РАЗЛИВНЫЕ НАПИТКИ.JPG",
+    title:{kz:"Сусындар Dailizza",ru:"Напитки Dailizza"},
     items:[
-      { id:"razliv-pepsi", name:{kz:"Pepsi",ru:"Pepsi"}, price:690, desc:{kz:"",ru:""}},
-      { id:"razliv-mer",  name:{kz:"Merinda",ru:"Merinda"}, price:690, desc:{kz:"",ru:""}},
-      { id:"razliv-7up",  name:{kz:"7Up",ru:"7Up"}, price:690, desc:{kz:"",ru:""}},
-      { id:"razliv-ice",  name:{kz:"Ice Tea",ru:"Ice Tea"}, price:690, desc:{kz:"",ru:""}},
+      { id:"ayran", name:{kz:"Айран 0,3",ru:"Айран 0,3"}, price:390, desc:{kz:"",ru:""}},
+      { id:"lipton", name:{kz:"Lipton 1 л",ru:"Lipton 1 л"}, price:890, desc:{kz:"",ru:""}},
+      { id:"razliv-pepsi", name:{kz:"Pepsi құйма 0,5",ru:"Pepsi разливной 0,5"}, price:690, desc:{kz:"",ru:""}},
+      { id:"razliv-mer",  name:{kz:"Merinda 0,5",ru:"Merinda 0,5"}, price:690, desc:{kz:"",ru:""}},
+      { id:"razliv-7up",  name:{kz:"7Up 0,5",ru:"7Up 0,5"}, price:690, desc:{kz:"",ru:""}},
+      { id:"razliv-ice",  name:{kz:"Ice Tea 0,5",ru:"Ice Tea 0,5"}, price:690, desc:{kz:"",ru:""}},
     ]
   },
 

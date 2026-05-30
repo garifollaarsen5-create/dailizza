@@ -226,11 +226,18 @@ input,textarea,select{font-size:16px}
 .card-footer{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:6px}
 .price{font-weight:900;font-size:18px;color:var(--green-3)}
 
-/* Категория-specific aspect ratios */
-.card[data-cat="hotdog"] .card-img{ aspect-ratio: 3/4; background:#fafdfa; }
-.card[data-cat="pizza"]  .card-img{ aspect-ratio: 1/1; background:#fafdfa; }
-.card[data-cat="drinks"] .card-img{ aspect-ratio: 1/1; background:#fafdfa; }
-.card[data-cat="snack"]  .card-img{ aspect-ratio: 1/1; background:#fafdfa; }
+/* Категория-specific aspect ratios — фото түрлеріне қарай */
+/* Тігінен фотолар: hot dog, pizza, snack, drinks → 3:4 vertical */
+.card[data-cat="hotdog"] .card-img,
+.card[data-cat="pizza"]  .card-img,
+.card[data-cat="drinks"] .card-img,
+.card[data-cat="snack"]  .card-img{ aspect-ratio: 3/4; background:#fafdfa; }
+
+/* Фотоны үлкен көрсету — кіші padding */
+.card[data-cat="hotdog"] .card-img img,
+.card[data-cat="pizza"]  .card-img img,
+.card[data-cat="drinks"] .card-img img,
+.card[data-cat="snack"]  .card-img img{ padding:4px; }
 
 /* ===== ADD button / Counter ===== */
 .btn-add{
