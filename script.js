@@ -1,3 +1,9 @@
+// ===== Supabase (бар болса) =====
+let sb = null;
+if(typeof SUPABASE_URL !== "undefined" && SUPABASE_URL && typeof supabase !== "undefined"){
+  sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+}
+
 // ===== State =====
 let lang = localStorage.getItem("dz_lang") || "kz";
 let cart = JSON.parse(localStorage.getItem("dz_cart") || "[]");
@@ -435,23 +441,88 @@ function handlePhotoFiles(files){
   });
 }
 
-function submitReview(e){
+async function submitReview(e){
   e.preventDefault();
   const name = $("#rName").value.trim();
   const text = $("#rText").value.trim();
   if(!name || !text){ toast(t("fill_required")); return; }
-  const reviews = loadReviews();
+
+  const btn = e.target.querySelector("button[type=submit]");
+  if(btn) btn.disabled = true;
+
   const today = new Date();
   const dd = today.toLocaleDateString(lang==="kz" ? "kk-KZ" : "ru-RU");
-  reviews.push({ name, text, photos:[...reviewPhotos], date: dd });
-  saveReviews(reviews);
+  const review = { name, text, photos:[...reviewPhotos], date: dd };
+
+  // Supabase-ке жіберу (бар болса)
+  if(sb){
+    try{
+      const { error } = await sb.from("reviews").insert([{
+        name, text, photos: review.photos, published: true
+      }]);
+      if(error) throw error;
+    } catch(err){
+      console.error("Supabase error:", err);
+      toast("Қате — жергілікті сақталды");
+      // Fallback: localStorage-қа сақтаймыз
+      const reviews = loadReviews();
+      reviews.push(review);
+      saveReviews(reviews);
+    }
+  } else {
+    // Supabase жоқ — тек localStorage
+    const reviews = loadReviews();
+    reviews.push(review);
+    saveReviews(reviews);
+  }
+
   reviewPhotos = [];
   $("#rName").value=""; $("#rText").value="";
   $("#photoPreview").innerHTML = "";
   $("#photoCamera").value = "";
   $("#photoGallery").value = "";
-  renderReviews();
+  if(btn) btn.disabled = false;
+  await renderReviewsAsync();
   toast(t("review_added"));
+}
+
+async function renderReviewsAsync(){
+  // Supabase-тен әкелу + localStorage қосу
+  const local = loadReviews();
+  let pub = [];
+  if(sb){
+    try{
+      const { data } = await sb.from("reviews")
+        .select("*").eq("published", true)
+        .order("created_at", { ascending: false }).limit(50);
+      pub = (data||[]).map(r=> ({
+        name: r.name, text: r.text, photos: r.photos||[],
+        date: r.created_at ? new Date(r.created_at).toLocaleDateString(lang==="kz"?"kk-KZ":"ru-RU") : ""
+      }));
+    } catch(e){ console.warn("supabase load fail", e); }
+  }
+  const list = $("#reviewsList");
+  // Жергіліктілер мен жарияланғандарды біріктіру (қайталанбасын деп қарапайым логика)
+  const combined = [...pub, ...local.slice().reverse()];
+  if(!combined.length){
+    list.innerHTML = `<div class="cart-empty">${t("no_reviews")}</div>`;
+    return;
+  }
+  list.innerHTML = combined.slice(0, 12).map(r=>{
+    const initial = (r.name||"?").charAt(0).toUpperCase();
+    const photos = (r.photos||[]).map(p=>`<img src="${p}" alt="">`).join("");
+    return `<div class="review">
+      <div class="review-head">
+        <div class="review-avatar">${initial}</div>
+        <div>
+          <div class="review-name">${escapeHtml(r.name)}</div>
+          <div class="review-date">${r.date}</div>
+        </div>
+      </div>
+      <div class="review-text">${escapeHtml(r.text)}</div>
+      ${photos ? `<div class="review-photos">${photos}</div>` : ""}
+    </div>`;
+  }).join("");
 }
 
 function setLang(l){
@@ -462,7 +533,7 @@ function setLang(l){
   renderMenu();
   refreshCart();
   refreshFab();
-  renderReviews();
+  renderReviewsAsync();
 }
 
 // ===== Init =====
@@ -472,7 +543,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   renderMenu();
   refreshCart();
   refreshFab();
-  renderReviews();
+  renderReviewsAsync();
 
   $$(".lang button").forEach(b=> b.onclick = ()=> setLang(b.dataset.lang));
   $("#openCart").onclick = openDrawer;

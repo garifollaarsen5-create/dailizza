@@ -199,6 +199,8 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
 <script>
 const T = {
   kz: {
@@ -253,8 +255,27 @@ function loadLocal(){
   return JSON.parse(localStorage.getItem("dz_reviews") || "[]");
 }
 
+let sb = null;
+if(typeof SUPABASE_URL !== "undefined" && SUPABASE_URL && typeof supabase !== "undefined"){
+  sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+}
+
 async function loadPublic(){
-  // Жарияланған пікірлер (admin қосады reviews.json арқылы)
+  // 1-ші: Supabase-тен (бар болса)
+  if(sb){
+    try{
+      const { data, error } = await sb.from("reviews")
+        .select("*").eq("published", true)
+        .order("created_at", { ascending: false }).limit(100);
+      if(error) throw error;
+      return (data||[]).map(r=> ({
+        name: r.name, text: r.text, photos: r.photos||[],
+        date: r.created_at ? new Date(r.created_at).toLocaleDateString(lang==="kz"?"kk-KZ":"ru-RU") : "",
+        _published: true
+      }));
+    } catch(e){ console.warn("supabase fail", e); }
+  }
+  // 2-ші fallback: reviews.json (admin қолмен қосады)
   try{
     const r = await fetch("reviews.json?t=" + Date.now());
     if(!r.ok) return [];
