@@ -17,10 +17,8 @@ const $ = (s, el=document) => el.querySelector(s);
 const $$ = (s, el=document) => [...el.querySelectorAll(s)];
 const fmt = (n) => n.toLocaleString("ru-RU") + " " + t("tenge");
 const imgUrl = (name) => {
-  // Фоны кесілген PNG-ды пайдаланамыз (clean/ папкадан)
   if(!name) return "";
-  const base = name.replace(/\.(jpg|jpeg|png)$/i, "");
-  return "clean/" + encodeURIComponent(base + ".png").replace(/%2F/g,"/");
+  return "photos/" + encodeURIComponent(name).replace(/%2F/g,"/");
 };
 
 function toast(msg){

@@ -212,14 +212,13 @@ input,textarea,select{font-size:16px}
 }
 .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
 .card-img{
-  aspect-ratio: 1/1;
-  background:linear-gradient(180deg, #ffffff 0%, #f7fbf8 100%);
-  display:grid;place-items:center; overflow:hidden;
+  aspect-ratio: 3/4;
+  background:#0f2417;
+  overflow:hidden;
   position:relative;
 }
 .card-img img{
-  width:100%;height:100%;object-fit:contain; padding:8px;
-  filter:drop-shadow(0 4px 10px rgba(15,71,38,.12));
+  width:100%;height:100%;object-fit:cover; display:block;
 }
 .card-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
 .card-title{font-weight:800;font-size:16px;line-height:1.25}
@@ -227,15 +226,9 @@ input,textarea,select{font-size:16px}
 .card-footer{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:6px}
 .price{font-weight:900;font-size:18px;color:var(--green-3)}
 
-/* Хот-дог, сусын — өте ұзын/тігінен фотолар, 3:4 */
-.card[data-cat="hotdog"] .card-img,
-.card[data-cat="drinks"] .card-img{ aspect-ratio: 3/4; }
-.card[data-cat="hotdog"] .card-img img,
-.card[data-cat="drinks"] .card-img img{ padding:4px; }
-
-/* Сусындар Dailizza group card — стакан тігінен */
-.group-card[data-cat="drinks"] .group-img{ aspect-ratio: 3/4; max-height: 460px; }
-.group-card[data-cat="drinks"] .group-img img{ padding:10px; }
+/* Барлық group card фотолары — толық сыю (cover) */
+.group-card .group-img{ background:#0f2417; }
+.group-card .group-img img{ object-fit:cover; padding:0; }
 
 /* ===== ADD button / Counter ===== */
 .btn-add{
@@ -288,13 +281,12 @@ input,textarea,select{font-size:16px}
   align-items:stretch;
 }
 .group-img{
-  background:linear-gradient(180deg, #ffffff 0%, #f7fbf8 100%);
-  display:grid;place-items:center;overflow:hidden;position:relative;
+  background:#0f2417;
+  display:block;overflow:hidden;position:relative;
   aspect-ratio: 1/1; min-height:240px;
 }
 .group-img img{
-  width:100%;height:100%;object-fit:contain;padding:14px;
-  filter:drop-shadow(0 6px 14px rgba(15,71,38,.14));
+  width:100%;height:100%;object-fit:cover;
 }
 .group-body{padding:18px 20px;display:flex;flex-direction:column;gap:6px}
 .group-title{font-weight:900;font-size:22px;letter-spacing:-.2px;margin:0 0 6px}
@@ -383,7 +375,7 @@ input,textarea,select{font-size:16px}
 .cart-item-img{
   width:64px;height:64px;border-radius:12px;background:#f3f9f4;overflow:hidden;flex:0 0 64px;
 }
-.cart-item-img img{width:100%;height:100%;object-fit:contain;padding:4px}
+.cart-item-img img{width:100%;height:100%;object-fit:cover}
 .cart-item-info{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
 .cart-item-name{font-weight:700;font-size:14px;line-height:1.25}
 .cart-item-price{font-weight:800;font-size:14px;color:var(--green-3)}

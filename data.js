@@ -110,7 +110,7 @@ const CATS = ["doner","baton","burger","bowl","wings","pizza","hotdog","snack","
 
 const MENU = [
   // ===== DONER =====
-  { type:"group", cat:"doner", img:"DONER'S.JPG",
+  { type:"group", cat:"doner", img:"донер.jpg",
     title:{kz:"Донер", ru:"Донер"},
     items:[
       { id:"doner-kur", name:{kz:"Куриный",ru:"Куриный"}, price:1690,
@@ -126,7 +126,7 @@ const MENU = [
   },
 
   // ===== BATON =====
-  { type:"group", cat:"baton", img:"BATON DONER'S.jpg",
+  { type:"group", cat:"baton", img:"батон донерс.jpg",
     title:{kz:"Донер в Батоне", ru:"Донер в Батоне"},
     items:[
       { id:"baton-kur", name:{kz:"Куриный",ru:"Куриный"}, price:1690,
@@ -142,44 +142,44 @@ const MENU = [
   },
 
   // ===== BURGERS — 4 жеке карточка =====
-  { type:"item", cat:"burger", img:"бургер говяжий.JPG", id:"burger-gov",
+  { type:"item", cat:"burger", img:"бургер говяжий.jpg", id:"burger-gov",
     name:{kz:"Бургер Говяжий",ru:"Бургер Говяжий"},
     desc:{kz:"Тоқаш, сиыр котлета, ірімшік, айсберг, қызанақ, пісірілген пияз, бургер соус",
           ru:"Булочка, говяжья котлета, плавленый сыр, айсберг, помидоры, жареный лук, бургер соус"},
     sizes:[ {label:"1x", price:2090}, {label:"2x", price:2590} ] },
 
-  { type:"item", cat:"burger", img:"бургер куриный.JPG", id:"burger-kur",
+  { type:"item", cat:"burger", img:"бургер куриный.jpg", id:"burger-kur",
     name:{kz:"Бургер Куриный",ru:"Бургер Куриный"},
     desc:{kz:"Тоқаш, тауық котлета, ірімшік, айсберг, қызанақ, пісірілген пияз, бургер соус",
           ru:"Булочка, куриная котлета, плавленый сыр, айсберг, помидоры, жареный лук, бургер соус"},
     sizes:[ {label:"1x", price:1690}, {label:"2x", price:2090} ] },
 
-  { type:"item", cat:"burger", img:"бургер закрытый.JPG", id:"burger-close",
+  { type:"item", cat:"burger", img:"бургер закрытый.jpg", id:"burger-close",
     name:{kz:"Бургер Закрытый",ru:"Бургер Закрытый"}, price:1890,
     desc:{kz:"Тоқаш, сиыр котлета, ірімшік, жұмыртқа, қызанақ, бургер соус",
           ru:"Булочка, говяжья котлета, плавленый сыр, яичница, помидоры, бургер соус"}},
 
-  { type:"item", cat:"burger", img:"бургер чикен.JPG", id:"burger-chick",
+  { type:"item", cat:"burger", img:"бургер чикен.jpg", id:"burger-chick",
     name:{kz:"Бургер Чикен",ru:"Бургер Чикен"}, price:1590,
     desc:{kz:"Панировкадағы тауық филесі, ірімшік, айсберг, қызанақ, пияз, бургер соус",
           ru:"Куриное филе в панировке, сыр, айсберг, помидоры, жареный лук, соус"}},
 
   // ===== Twister & Boxmaster =====
-  { type:"item", cat:"burger", img:"СТРИПСЫ.JPG", id:"twister",
+  { type:"item", cat:"burger", img:"стрипсы.jpg", id:"twister",
     name:{kz:"Твистер",ru:"Твистер"}, price:1590,
     desc:{kz:"Стрипстер, фри, ірімшік, қызанақ, айсберг, фирмалық соус, лепешка",
           ru:"Стрипсы, фри, сыр, помидоры, айсберг, фирменные соусы, лепешка"}},
-  { type:"item", cat:"burger", img:"BOXMASTER.JPG", id:"boxmaster",
+  { type:"item", cat:"burger", img:"боксмастер.jpg", id:"boxmaster",
     name:{kz:"Бокс Мастер",ru:"Бокс Мастер"}, price:1690,
     desc:{kz:"Тауық филесі, айсберг, қызанақ, ірімшік, хашбраун, лепешка",
           ru:"Куриное филе, айсберг, помидоры, сыр, хашбраун в лепешке"}},
 
   // ===== BOWL & САЛАТ =====
-  { type:"item", cat:"bowl", img:"БОУЛ С ФРИ.jpg", id:"bowl-fri",
+  { type:"item", cat:"bowl", img:"боул с фри.jpg", id:"bowl-fri",
     name:{kz:"Боул фримен",ru:"Боул с фри"}, price:1690,
     desc:{kz:"Тауық, фри, ірімшік, көкөніс, фирмалық соус",
           ru:"Курица, фри, сыр, овощи, фирменный соус"}},
-  { type:"item", cat:"bowl", img:"БОУЛ С РИСОМ.jpg", id:"bowl-rice",
+  { type:"item", cat:"bowl", img:"боул с рисом.jpg", id:"bowl-rice",
     name:{kz:"Боул күрішпен",ru:"Боул с рисом"}, price:1690,
     desc:{kz:"Тауық, күріш, ірімшік, көкөніс, фирмалық соус",
           ru:"Курица, рис, сыр, овощи, фирменный соус"}},
@@ -193,10 +193,10 @@ const MENU = [
   },
 
   // ===== SNACKS =====
-  { type:"item", cat:"snack", img:"ФРИ.JPG", id:"fri-150",
+  { type:"item", cat:"snack", img:"фри.jpg", id:"fri-150",
     name:{kz:"Картоп Фри",ru:"Картофель Фри"}, price:790,
     desc:{kz:"150 г, хрусткі",ru:"150 г, хрустящий"}},
-  { type:"item", cat:"snack", img:"СТРИПСЫ.JPG", id:"strips-3",
+  { type:"item", cat:"snack", img:"стрипсы.jpg", id:"strips-3",
     name:{kz:"Стрипсы",ru:"Стрипсы"}, price:1690,
     desc:{kz:"Хрусткі тауық стрипстері",ru:"Хрустящие куриные стрипсы"}},
   { type:"list", cat:"snack",
@@ -208,7 +208,7 @@ const MENU = [
   },
 
   // ===== WINGS =====
-  { type:"group", cat:"wings", img:"CHIKEN WINGS.JPG",
+  { type:"group", cat:"wings", img:"чикен уингс.jpg",
     title:{kz:"Қанаттар",ru:"Крылышки"},
     items:[
       { id:"wings-10", name:{kz:"10 дана",ru:"10 шт"}, price:3290, desc:{kz:"Фирмалық соуспен",ru:"С фирменным соусом"}},
@@ -220,22 +220,19 @@ const MENU = [
     ]
   },
 
-  // ===== PIZZA — фотомен 5 =====
-  { type:"item", cat:"pizza", img:"МАРГАРИТА.jpg", id:"pizza-marg",
-    name:{kz:"Маргарита",ru:"Маргарита"}, price:2890,
-    desc:{kz:"Томат соусы, моцарелла, базилик",ru:"Томат, моцарелла, базилик"}},
-  { type:"item", cat:"pizza", img:"БОЛОНЬЕЗЕ.jpg", id:"pizza-bol",
+  // ===== PIZZA — фотомен 4 =====
+  { type:"item", cat:"pizza", img:"болоньезе.jpg", id:"pizza-bol",
     name:{kz:"Болоньезе",ru:"Болоньезе"}, price:3290,
     desc:{kz:"Болонез соусы, моцарелла, ет фарш",ru:"Соус болоньезе, моцарелла, мясной фарш"}},
-  { type:"item", cat:"pizza", img:"ПТИЧКА В БУЛКЕ.jpg", id:"pizza-bird",
+  { type:"item", cat:"pizza", img:"птичка в булке.jpg", id:"pizza-bird",
     name:{kz:"Птичка в булке",ru:"Птичка в булке"}, price:3290,
     desc:{kz:"Балапан, сарымсақ, томат, моцарелла, бургер соус, Альфредо",
           ru:"Цыпленок, чеснок, томат, моцарелла, бургер соус, Альфредо"}},
-  { type:"item", cat:"pizza", img:"ИМПЕРАТОРСКАЯ.jpg", id:"pizza-imp",
+  { type:"item", cat:"pizza", img:"императорская.jpg", id:"pizza-imp",
     name:{kz:"Императорская",ru:"Императорская"}, price:4590,
     desc:{kz:"Сиыр еті, BBQ соустағы пияз, моцарелла, пицца соусы",
           ru:"Говядина, жареный лук в BBQ, моцарелла, пицца соус"}},
-  { type:"item", cat:"pizza", img:"ФИЛАДЕЛЬФИЯ.jpg", id:"pizza-fil",
+  { type:"item", cat:"pizza", img:"филадельфия.jpg", id:"pizza-fil",
     name:{kz:"Филадельфия",ru:"Филадельфия"}, price:4090,
     desc:{kz:"Сёмга, ірімшік, терияки, руккола, моцарелла",
           ru:"Семга, творожный сыр, терияки, руккола, моцарелла"}},
@@ -244,6 +241,8 @@ const MENU = [
   { type:"list", cat:"pizza",
     title:{kz:"Тағы пицца",ru:"Ещё пиццы"},
     items:[
+      { id:"pizza-marg", name:{kz:"Маргарита",ru:"Маргарита"}, price:2890,
+        desc:{kz:"Томат соусы, моцарелла, базилик",ru:"Томат, моцарелла, базилик"}},
       { id:"pizza-pep", name:{kz:"Пепперони",ru:"Пепперони"}, price:3090,
         desc:{kz:"Пепперони, моцарелла, томат соусы",ru:"Пепперони, моцарелла, томат"}},
       { id:"pizza-bas", name:{kz:"Basilico престиж",ru:"Basilico престиж"}, price:4290,
@@ -262,36 +261,36 @@ const MENU = [
   },
 
   // ===== HOT DOG =====
-  { type:"item", cat:"hotdog", img:"КЛАССИЧЕСКИЙ.jpg", id:"hd-class",
+  { type:"item", cat:"hotdog", img:"классический хот дог.jpg", id:"hd-class",
     name:{kz:"Классикалық",ru:"Классический"}, price:1490,
     desc:{kz:"Тоқаш, сиыр сосискасы, қыша, кетчуп, пісірілген пияз, ақ соус",
           ru:"Булочка, говяжьи сосиски, горчица, кетчуп, жареный лук, белый соус"}},
-  { type:"item", cat:"hotdog", img:"МЕКСИКАНСКИЙ.jpg", id:"hd-mex",
+  { type:"item", cat:"hotdog", img:"мексиканский хот дог.jpg", id:"hd-mex",
     name:{kz:"Мексикандық",ru:"Мексиканский"}, price:1890,
     desc:{kz:"Тоқаш, сиыр сосискасы, ет фарш, моцарелла, халапеньо, ақ соус",
           ru:"Булочка, гов. сосиска, гов. фарш, моцарелла, халапеньо, белый соус"}},
-  { type:"item", cat:"hotdog", img:"ЧИКЕН ДОГ.jpg", id:"hd-chick",
+  { type:"item", cat:"hotdog", img:"чикен хот дог.jpg", id:"hd-chick",
     name:{kz:"Чикен Дог",ru:"Чикен Дог"}, price:1690,
     desc:{kz:"Тоқаш, фри, стрипстер, айсберг, ақ соус, ірімшік соусы",
           ru:"Булка, фри, стрипсы, айсберг, белый соус, сырный соус"}},
-  { type:"item", cat:"hotdog", img:"АССОРТИ ДОГ.jpg", id:"hd-ass",
+  { type:"item", cat:"hotdog", img:"ассорти хот дог.jpg", id:"hd-ass",
     name:{kz:"Ассорти Дог",ru:"Ассорти Дог"}, price:1890,
     desc:{kz:"Тауық еті, сиыр сосискасы, ақ соус, тұздалған қияр",
           ru:"Куриное мясо, говяжья сосиска, белый соус, соленые огурцы"}},
-  { type:"item", cat:"hotdog", img:"NEW  YORK.jpg", id:"hd-ny",
+  { type:"item", cat:"hotdog", img:"нью йорк ход тог.jpg", id:"hd-ny",
     name:{kz:"New York",ru:"New York"}, price:1890,
     desc:{kz:"Тоқаш, сиыр сосискасы, чеддер, айсберг, қыша, кетчуп, ақ соус",
           ru:"Булочка, говяжья сосиска, чеддер, айсберг, горчица, кетчуп, белый соус"}},
 
   // ===== DRINKS =====
   // Pepsi — өз фотосымен, екі көлемде
-  { type:"item", cat:"drinks", img:"ПЕПСИ.JPG", id:"pepsi",
+  { type:"item", cat:"drinks", img:"пепси.jpg", id:"pepsi",
     name:{kz:"Pepsi",ru:"Pepsi"},
     desc:{kz:"Классикалық дәм",ru:"Классический вкус"},
     sizes:[ {label:"0,5 л", price:690}, {label:"1 л", price:890} ] },
 
   // Қалған сусындар — Dailizza ыдысының фотосымен group
-  { type:"group", cat:"drinks", img:"РАЗЛИВНЫЕ НАПИТКИ.JPG",
+  { type:"group", cat:"drinks", img:"разливные напитки.jpg",
     title:{kz:"Сусындар Dailizza",ru:"Напитки Dailizza"},
     items:[
       { id:"ayran", name:{kz:"Айран 0,3",ru:"Айран 0,3"}, price:390, desc:{kz:"",ru:""}},
