@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="kz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
+<meta name="theme-color" content="#1f8a3a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="format-detection" content="telephone=no">
+<title>Dailizza · Үздік фаст фуд 2025 · Құлсары</title>
+<link rel="icon" href="дейлиза%20логотип.PNG">
+<link rel="apple-touch-icon" href="дейлиза%20логотип.PNG">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="#" class="brand">
+      <span class="brand-logo"><img src="дейлиза%20логотип.PNG" alt="Dailizza"></span>
+      <span class="brand-text">
+        <span class="brand-name">Dailizza</span>
+        <span class="brand-tagline" data-i="tagline">Үздік фаст фуд · 2025</span>
+        <a class="ig-link" href="https://www.instagram.com/dailizza.24.7?igsh=NDN1ZWI1aXc0NG1i" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <span>@dailizza.24.7</span>
+        </a>
+      </span>
+    </a>
+    <nav class="nav">
+      <a href="#menu" data-i="nav_menu">Мәзір</a>
+      <a href="#reviews" data-i="nav_reviews">Пікірлер</a>
+      <a href="#contacts" data-i="nav_contacts">Байланыс</a>
+    </nav>
+    <div class="lang">
+      <button data-lang="kz" class="active">KZ</button>
+      <button data-lang="ru">RU</button>
+    </div>
+    <button id="openCart" class="cart-btn" aria-label="Cart">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+      <span class="cart-btn-label" data-i="cart">Корзина</span>
+      <span class="cart-count" id="cartCount" style="display:none">0</span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-card">
+    <div class="hero-eyebrow" data-i="tagline">Үздік фаст фуд · 2025</div>
+    <h1 data-i="hero_title">Құлсарының №1 фаст фуды</h1>
+    <p data-i="hero_sub">Балғын ингредиенттер, фирмалық соустар, шынайы дәм. 24/7 — ұйықтамаймыз, аштықпен қалдырмаймыз.</p>
+    <button id="heroCta" class="hero-cta">
+      <span data-i="hero_cta">Тапсырыс беру</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+  <div class="hero-visual">
+    <div class="blob"></div>
+    <div class="logo-big"><img src="дейлиза%20логотип.PNG" alt="Dailizza"></div>
+    <div class="hero-badge b1"><span class="dot"></span> <span data-i="badge_open">24 · 7 · 365</span></div>
+    <div class="hero-badge b2" data-i="badge_fast">🔥 Дайын — 15 мин</div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">⏰</div>
+      <h3 data-i="why_1_t">Үздіксіз 24/7</h3>
+      <p data-i="why_1_d">Түнгі 3-те қарным ашты ма? Біз ашықпыз.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🥬</div>
+      <h3 data-i="why_2_t">Балғын дәм</h3>
+      <p data-i="why_2_d">Тек балғын ингредиенттер. Күн сайын жаңасы.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⚡</div>
+      <h3 data-i="why_3_t">Жылдам жеткізу</h3>
+      <p data-i="why_3_d">Тапсырыс — 5 минут, дайын — 15 минут.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🥫</div>
+      <h3 data-i="why_4_t">Фирмалық соустар</h3>
+      <p data-i="why_4_d">Біздің құпиямыз — үйде жасалған соустар.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cats" id="cats"></div>
+
+<main class="menu" id="menu"></main>
+
+<section class="reviews-wrap" id="reviews">
+  <div class="reviews-head">
+    <h2 data-i="review_title">Пікірлер</h2>
+    <p data-i="review_sub">Бізге пікір қалдырыңыз</p>
+  </div>
+
+  <form id="reviewForm" class="review-form">
+    <div class="field">
+      <label data-i="review_name">Атыңыз</label>
+      <input id="rName" type="text" required data-ph="name_ph">
+    </div>
+    <div class="field">
+      <label data-i="review_photo">Фото</label>
+      <div class="photo-row">
+        <button type="button" id="btnCamera" class="photo-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span data-i="review_camera">Камера</span>
+        </button>
+        <button type="button" id="btnGallery" class="photo-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span data-i="review_gallery">Галерея</span>
+        </button>
+      </div>
+      <input id="photoCamera"  type="file" accept="image/*" capture="environment" style="display:none">
+      <input id="photoGallery" type="file" accept="image/*" multiple             style="display:none">
+      <div id="photoPreview" class="upload-preview"></div>
+    </div>
+    <div class="field field-full">
+      <label data-i="review_text">Пікіріңіз</label>
+      <textarea id="rText" required data-ph="comment_ph"></textarea>
+    </div>
+    <button type="submit" class="btn-primary" data-i="review_send">Жіберу</button>
+  </form>
+
+  <div id="reviewsList" class="reviews-list"></div>
+</section>
+
+<footer class="footer" id="contacts">
+  <div class="footer-inner">
+    <div>
+      <h4 data-i="contacts_title">Байланыс</h4>
+      <p><strong data-i="address_label">Мекенжай</strong>: Құлсары, Dailizza</p>
+      <p><strong data-i="work_hours">Жұмыс уақыты</strong>: <span data-i="open247">24 / 7 / 365</span></p>
+      <p>📞 <a href="tel:+77710552525">+7 771 055 25 25</a></p>
+      <p>📷 <a href="https://www.instagram.com/dailizza.24.7?igsh=NDN1ZWI1aXc0NG1i" target="_blank" rel="noopener">@dailizza.24.7</a></p>
+      <div class="socials">
+        <a class="social-btn" href="https://wa.me/77710552525" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.8-1.9-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.5.1-.2 0-.4 0-.5 0-.1-.6-1.5-.8-2.1-.2-.5-.5-.4-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2.2c-5.4 0-9.8 4.4-9.8 9.8 0 1.7.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.4 0 9.8-4.4 9.8-9.8s-4.4-9.8-9.8-9.8zm0 17.9c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.2.8.9-3.1-.2-.3c-.8-1.3-1.3-2.9-1.3-4.5 0-4.5 3.7-8.2 8.2-8.2s8.2 3.7 8.2 8.2-3.6 8.5-8 8.5z"/></svg>
+        </a>
+        <a class="social-btn" href="https://www.instagram.com/dailizza.24.7?igsh=NDN1ZWI1aXc0NG1i" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a class="social-btn" href="https://2gis.kz/atyrau/geo/70000001102442551/54.023850,46.958001" target="_blank" rel="noopener" aria-label="2GIS">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <h4>Меню</h4>
+      <p><a href="#sec-doner">Донер / Батон</a></p>
+      <p><a href="#sec-burger">Бургер / Твистер</a></p>
+      <p><a href="#sec-pizza">Пицца</a></p>
+      <p><a href="#sec-hotdog">Хот-Дог</a></p>
+      <p><a href="#sec-combo">Комбо</a></p>
+    </div>
+    <div>
+      <h4>Dailizza</h4>
+      <p data-i="hero_sub">Балғын ингредиенттер, фирмалық соустар, шынайы дәм. 24/7.</p>
+    </div>
+  </div>
+  <div class="copy">
+    <span>© 2026 Dailizza · <span data-i="city">Құлсары</span></span>
+    <span>WhatsApp +7 771 055 25 25</span>
+  </div>
+</footer>
+
+<!-- Floating cart FAB -->
+<button id="fab" class="fab" aria-label="Open cart">
+  <div class="fab-icon">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+    <span class="badge" id="fabBadge">0</span>
+  </div>
+  <div class="fab-info">
+    <span class="fab-count" data-i="cart">Корзина</span>
+    <span class="fab-total" id="fabTotal">0 ₸</span>
+  </div>
+</button>
+
+<!-- Cart drawer -->
+<div id="drawerBg" class="drawer-bg"></div>
+<aside id="drawer" class="drawer" role="dialog" aria-label="Cart">
+  <div class="drawer-head">
+    <h3 data-i="cart">Корзина</h3>
+    <button id="closeCart" class="icon-btn" aria-label="close">✕</button>
+  </div>
+  <div id="cartList" class="cart-list"></div>
+  <div class="drawer-foot">
+    <div class="total-row">
+      <span class="total-label" data-i="total">Жалпы сома</span>
+      <span class="total-val" id="totalVal">0 ₸</span>
+    </div>
+    <button id="btnCheckout" class="btn-checkout" disabled>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.8-1.9-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.5.1-.2 0-.4 0-.5 0-.1-.6-1.5-.8-2.1-.2-.5-.5-.4-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2.2c-5.4 0-9.8 4.4-9.8 9.8 0 1.7.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.4 0 9.8-4.4 9.8-9.8s-4.4-9.8-9.8-9.8z"/></svg>
+      <span data-i="checkout">WhatsApp-қа жіберу</span>
+    </button>
+  </div>
+</aside>
+
+<!-- Order modal -->
+<div id="orderBg" class="modal-bg" role="dialog" aria-label="Order">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 data-i="order_form">Тапсырыс рәсімдеу</h3>
+      <button id="closeOrder" class="icon-btn">✕</button>
+    </div>
+    <form id="orderForm" class="modal-body">
+      <div class="field">
+        <label data-i="delivery_type">Алу түрі</label>
+        <div class="toggle" id="deliveryToggle">
+          <button type="button" data-type="pickup" class="active" data-i="pickup">Өзім аламын</button>
+          <button type="button" data-type="delivery" data-i="delivery">Жеткізу</button>
+        </div>
+      </div>
+      <div class="field" id="addrField" style="display:none">
+        <label data-i="address">Мекенжай</label>
+        <input id="fAddress" type="text" data-ph="address_ph">
+      </div>
+      <div class="field">
+        <label data-i="name_label">Атыңыз</label>
+        <input id="fName" type="text" required autocomplete="name" data-ph="name_ph">
+      </div>
+      <div class="field">
+        <label data-i="phone">WhatsApp нөмір</label>
+        <input id="fPhone" type="tel" required autocomplete="tel" inputmode="tel" data-ph="phone_ph">
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label data-i="date">Күні</label>
+          <input id="fDate" type="date" required>
+        </div>
+        <div class="field">
+          <label data-i="time">Уақыты</label>
+          <input id="fTime" type="time" required>
+        </div>
+      </div>
+      <div class="field">
+        <label data-i="comment">Түсініктеме</label>
+        <textarea id="fComment" data-ph="comment_ph"></textarea>
+      </div>
+      <button type="submit" class="btn-checkout">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.8-1.9-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.5.1-.2 0-.4 0-.5 0-.1-.6-1.5-.8-2.1-.2-.5-.5-.4-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2.2c-5.4 0-9.8 4.4-9.8 9.8 0 1.7.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.4 0 9.8-4.4 9.8-9.8s-4.4-9.8-9.8-9.8z"/></svg>
+        <span data-i="send">WhatsApp-қа жіберу</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
