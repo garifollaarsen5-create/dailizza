@@ -9,19 +9,19 @@
     --green:#1f8a3a; --green-2:#16a34a; --green-3:#0e6e2e; --green-soft:#e6f4ea;
     --line:#e1ecdf; --shadow:0 8px 24px rgba(15,71,38,.08);
   }
-  *{box-sizing:border-box}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   body{
     font-family:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;
-    margin:0; min-height:100vh; padding:30px 16px;
+    margin:0; min-height:100vh; padding:24px 14px;
     background:linear-gradient(135deg,#f4faf5 0%, #d6ebda 100%);
     color:#0f2417;
   }
-  .wrap{max-width:560px;margin:0 auto;background:#fff;border-radius:24px;box-shadow:var(--shadow);padding:28px}
-  .head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-  .logo{width:54px;height:54px;border-radius:50%;background:#fff;box-shadow:var(--shadow);overflow:hidden}
+  .wrap{max-width:560px;margin:0 auto;background:#fff;border-radius:24px;box-shadow:var(--shadow);padding:24px}
+  .head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .logo{width:50px;height:50px;border-radius:50%;background:#fff;box-shadow:var(--shadow);overflow:hidden;flex-shrink:0}
   .logo img{width:100%;height:100%;object-fit:cover}
-  h1{margin:0;font-size:22px;font-weight:900}
-  p.sub{margin:4px 0 0;color:#5e6f64;font-size:14px}
+  h1{margin:0;font-size:20px;font-weight:900}
+  p.sub{margin:3px 0 0;color:#5e6f64;font-size:13px}
 
   label{font-weight:700;font-size:13px;display:block;margin:14px 0 6px}
   input[type=text]{
@@ -41,13 +41,18 @@
   button.alt{background:var(--green-soft);color:var(--green-3)}
 
   .qr-box{
-    margin:24px auto 0;padding:24px;background:#f7fbf8;border-radius:18px;
-    display:grid;place-items:center;min-height:340px;
+    margin:20px auto 0;padding:20px;background:#fff;border:1.5px solid var(--line);border-radius:18px;
+    display:grid;place-items:center;min-height:300px;
   }
-  .qr-box img{max-width:100%;border-radius:12px;background:#fff;padding:12px;box-shadow:var(--shadow)}
-  .hint{color:#5e6f64;font-size:13px;text-align:center;margin-top:14px;line-height:1.5}
-  .hint code{background:#e6f4ea;padding:2px 8px;border-radius:6px;color:var(--green-3);font-weight:700}
-  .err{color:#c0392b;font-size:13px;margin-top:8px}
+  .qr-box img{max-width:100%;width:300px;height:300px;display:block}
+  #qrPlaceholder{color:#8aa097;font-size:13px;text-align:center;padding:30px 10px}
+  .hint{color:#5e6f64;font-size:12px;text-align:center;margin-top:12px;line-height:1.55}
+  .hint code{background:#e6f4ea;padding:2px 7px;border-radius:6px;color:var(--green-3);font-weight:700;font-size:11px}
+  .err{color:#c0392b;font-size:12px;margin-top:8px;text-align:center}
+  .urlbox{
+    background:var(--green-soft);color:var(--green-3);padding:8px 12px;border-radius:10px;
+    font-size:12px;font-weight:700;display:inline-block;margin-top:8px;word-break:break-all;
+  }
 </style>
 </head>
 <body>
@@ -56,26 +61,30 @@
     <div class="logo"><img src="дейлиза%20логотип.PNG" alt="Dailizza"></div>
     <div>
       <h1>QR код жасау</h1>
-      <p class="sub">Сайт сілтемесін енгізіңіз → QR код алыңыз</p>
+      <p class="sub">Сайт сілтемесі → QR код</p>
     </div>
   </div>
 
-  <label for="url">Сайт сілтемесі (URL)</label>
-  <input id="url" type="text" placeholder="https://dailizza.kz" value="https://dailizza.kz">
+  <label for="url">Сайт URL</label>
+  <input id="url" type="text" placeholder="https://dailizza247.vercel.app">
 
   <div class="row">
-    <button id="gen">QR жасау</button>
-    <button id="dl" class="alt" disabled>📥 Жүктеп алу (PNG)</button>
+    <button id="gen">🔄 Жаңарту</button>
+    <button id="dl" class="alt">📥 PNG жүктеу</button>
   </div>
 
   <div class="qr-box">
     <img id="qrimg" alt="QR" style="display:none">
-    <div id="qrPlaceholder" style="color:#8aa097;font-size:14px">QR осы жерде шығады</div>
+    <div id="qrPlaceholder">QR осы жерде шығады</div>
+  </div>
+
+  <div style="text-align:center">
+    <span class="urlbox" id="urlOut">—</span>
   </div>
 
   <p class="hint">
-    💡 Алдымен сайтты интернетке жариялаңыз (мысалы: <code>Netlify</code>, <code>Vercel</code>, <code>GitHub Pages</code> — тегін),
-    сосын сол сайттың сілтемесін енгізіңіз. Клиенттер QR-ды сканерлегенде бірден сайтыңызға кіреді.
+    Клиенттер QR-ды сканерлегенде осы сайтыңызға кіреді.<br>
+    Тегін PNG жүктеп алып, рекламаға, чекке немесе кафенің қабырғасына қойыңыз.
   </p>
   <div id="err" class="err"></div>
 </div>
@@ -83,37 +92,66 @@
 <script>
 const $ = s => document.querySelector(s);
 
+// Текущий сайт URL автоматты қою (хостинг)
+function defaultUrl(){
+  // Егер сайт хостингте ашылса — текущий URL
+  if(location.protocol === 'https:' || location.protocol === 'http:'){
+    if(location.hostname && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1'){
+      // qr.html-ден index.html-ге өту үшін base
+      const base = location.protocol + '//' + location.host + location.pathname.replace(/qr\.html$/, '');
+      return base;
+    }
+  }
+  return 'https://dailizza247.vercel.app';
+}
+$("#url").value = defaultUrl();
+
 async function generate(){
   const url = $("#url").value.trim();
   $("#err").textContent = "";
-  if(!url){ $("#err").textContent = "Сілтеме енгізіңіз"; return; }
-  // QR арқылы api.qrserver.com (тегін, лимитсіз)
-  const src = `https://api.qrserver.com/v1/create-qr-code/?size=600x600&margin=20&ecc=H&color=1f8a3a&data=${encodeURIComponent(url)}`;
+  $("#urlOut").textContent = url;
+  if(!url){
+    $("#err").textContent = "Сілтеме енгізіңіз";
+    $("#urlOut").textContent = "—";
+    return;
+  }
+  // Қара/ақ QR — ең сенімді сканер үшін
+  const src = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&margin=12&ecc=M&format=png&data=${encodeURIComponent(url)}`;
   const img = $("#qrimg");
   $("#qrPlaceholder").style.display = "none";
   img.style.display = "block";
+  img.onload = ()=>{
+    img.dataset.ok = "1";
+  };
+  img.onerror = ()=>{
+    $("#err").textContent = "QR жасалмады. Интернет байланысын тексеріңіз.";
+  };
   img.src = src;
+}
+
+$("#dl").onclick = async ()=>{
+  const url = $("#url").value.trim();
+  if(!url){ $("#err").textContent = "Сілтеме енгізіңіз"; return; }
+  const src = `https://api.qrserver.com/v1/create-qr-code/?size=800x800&margin=20&ecc=M&format=png&data=${encodeURIComponent(url)}`;
   try{
     const r = await fetch(src);
-    if(!r.ok) throw new Error("network");
+    if(!r.ok) throw 0;
     const blob = await r.blob();
-    const dlBtn = $("#dl");
-    dlBtn.disabled = false;
-    dlBtn.onclick = ()=>{
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "dailizza-qr.png";
-      a.click();
-      setTimeout(()=> URL.revokeObjectURL(a.href), 4000);
-    };
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "dailizza-qr.png";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=> URL.revokeObjectURL(a.href), 4000);
   } catch(e){
-    $("#err").textContent = "Интернет жоқ. QR онлайн жасалады.";
+    // CORS қателіктен fallback — жаңа қойындыда ашу
+    window.open(src, "_blank");
   }
-}
+};
 
 $("#gen").onclick = generate;
 $("#url").addEventListener("keydown", e=>{ if(e.key==="Enter") generate(); });
-// автоматты түрде бастапқы URL-мен жасау
 generate();
 </script>
 </body>

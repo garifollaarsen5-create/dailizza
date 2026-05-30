@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="kz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
+<meta name="theme-color" content="#1f8a3a">
+<title>Dailizza · Пікірлер</title>
+<link rel="icon" href="дейлиза%20логотип.PNG">
+<link rel="apple-touch-icon" href="дейлиза%20логотип.PNG">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .rv-page{max-width:1100px;margin:30px auto 80px;padding:0 16px}
+  .rv-head{
+    background:linear-gradient(135deg,var(--green-3),var(--green-2));
+    color:#fff;border-radius:24px;padding:30px 28px;position:relative;overflow:hidden;
+    box-shadow:var(--shadow-lg);
+  }
+  .rv-head::before{
+    content:""; position:absolute; right:-60px; top:-60px;
+    width:200px;height:200px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.18),transparent 70%);
+  }
+  .rv-head h1{margin:0 0 8px;font-size:30px;font-weight:900;letter-spacing:-.3px;position:relative}
+  .rv-head p{margin:0;color:rgba(255,255,255,.9);font-size:15px;position:relative;line-height:1.5}
+  .rv-back{
+    display:inline-flex;align-items:center;gap:6px;margin-bottom:14px;
+    background:rgba(255,255,255,.18);color:#fff;padding:8px 14px;border-radius:99px;
+    font-weight:700;font-size:13px;backdrop-filter:blur(6px);
+  }
+  .rv-back:hover{background:rgba(255,255,255,.28)}
+
+  .rv-stats{
+    display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;position:relative;
+  }
+  .rv-stat{
+    background:rgba(255,255,255,.18);backdrop-filter:blur(6px);
+    padding:10px 16px;border-radius:14px;
+  }
+  .rv-stat .num{font-size:22px;font-weight:900;line-height:1}
+  .rv-stat .lbl{font-size:11px;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.4px}
+
+  .rv-list{
+    margin-top:28px;display:grid;gap:16px;
+    grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  }
+  .rv-empty{
+    text-align:center;color:var(--muted);padding:80px 20px;
+    background:#fff;border-radius:24px;box-shadow:var(--shadow);
+    font-weight:600;font-size:15px;
+  }
+  .rv-empty .icon{font-size:48px;margin-bottom:10px;display:block}
+
+  .rv-card{
+    background:#fff;border-radius:20px;padding:20px;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;gap:10px;transition:.25s;
+  }
+  .rv-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .rv-card-head{display:flex;align-items:center;gap:12px}
+  .rv-avatar{
+    width:46px;height:46px;border-radius:50%;
+    background:linear-gradient(135deg,var(--green),var(--green-2));color:#fff;
+    display:grid;place-items:center;font-weight:900;font-size:18px;flex-shrink:0;
+  }
+  .rv-meta{flex:1;min-width:0}
+  .rv-name{font-weight:800;font-size:15px;line-height:1.2}
+  .rv-date{font-size:12px;color:var(--muted);margin-top:2px}
+  .rv-stars{color:#ffb800;font-size:14px;letter-spacing:1px}
+  .rv-text{font-size:14px;line-height:1.55;color:#1f3328;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:break-word}
+  .rv-photos{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+  .rv-photos img{
+    width:84px;height:84px;border-radius:12px;object-fit:cover;cursor:pointer;
+    border:2px solid var(--green-soft);
+  }
+  .rv-photos img:hover{border-color:var(--green-2)}
+
+  .rv-badge{
+    display:inline-flex;align-items:center;gap:5px;
+    background:var(--green-soft);color:var(--green-3);
+    padding:3px 8px;border-radius:99px;font-size:10px;font-weight:800;
+    text-transform:uppercase;letter-spacing:.3px;
+  }
+  .rv-badge.local{background:#fff4e2;color:#b46b00}
+
+  /* Lightbox */
+  .lb{
+    position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;
+    display:none;align-items:center;justify-content:center;padding:20px;
+  }
+  .lb.show{display:flex}
+  .lb img{max-width:100%;max-height:90vh;border-radius:14px}
+  .lb-close{
+    position:absolute;top:20px;right:20px;width:42px;height:42px;border-radius:50%;
+    background:rgba(255,255,255,.2);color:#fff;font-size:22px;
+    display:grid;place-items:center;border:none;cursor:pointer;
+  }
+
+  /* Add review CTA */
+  .rv-cta{
+    margin-top:24px;background:#fff;border-radius:20px;padding:22px;
+    box-shadow:var(--shadow);display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  }
+  .rv-cta-info{flex:1;min-width:220px}
+  .rv-cta h3{margin:0 0 4px;font-size:18px;font-weight:900}
+  .rv-cta p{margin:0;color:var(--muted);font-size:13px}
+  .rv-cta a{
+    display:inline-flex;align-items:center;gap:8px;
+    background:linear-gradient(135deg,var(--green),var(--green-2));color:#fff;
+    padding:14px 22px;border-radius:14px;font-weight:800;font-size:14px;
+    box-shadow:0 6px 18px rgba(31,138,58,.3);
+  }
+  .rv-cta a:hover{transform:translateY(-2px);transition:.15s}
+
+  @media (max-width:640px){
+    .rv-page{margin:18px auto 60px;padding:0 12px}
+    .rv-head{padding:22px 20px;border-radius:20px}
+    .rv-head h1{font-size:24px}
+    .rv-head p{font-size:13px}
+    .rv-list{grid-template-columns:1fr;gap:12px}
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-logo"><img src="дейлиза%20логотип.PNG" alt="Dailizza"></span>
+      <span class="brand-text">
+        <span class="brand-name">Dailizza</span>
+        <span class="brand-tagline">Үздік фаст фуд · 2025</span>
+      </span>
+    </a>
+    <nav class="nav">
+      <a href="index.html#menu">Мәзір</a>
+      <a href="reviews.html">Пікірлер</a>
+      <a href="index.html#contacts">Байланыс</a>
+    </nav>
+    <div class="lang">
+      <button data-lang="kz" class="active">KZ</button>
+      <button data-lang="ru">RU</button>
+    </div>
+  </div>
+</header>
+
+<section class="rv-page">
+  <div class="rv-head">
+    <a href="index.html" class="rv-back">← <span data-i="back">Артқа</span></a>
+    <h1 data-i="rev_title">Біздің клиенттердің пікірлері</h1>
+    <p data-i="rev_sub">Шынайы пікірлер — шынайы дәм туралы. Сіз де өз пікіріңізді қалдырыңыз!</p>
+    <div class="rv-stats">
+      <div class="rv-stat"><div class="num" id="statCount">0</div><div class="lbl" data-i="rev_total">Пікір</div></div>
+      <div class="rv-stat"><div class="num">★ 5.0</div><div class="lbl" data-i="rev_rating">Орташа баға</div></div>
+      <div class="rv-stat"><div class="num">24/7</div><div class="lbl" data-i="rev_open">Ашықпыз</div></div>
+    </div>
+  </div>
+
+  <div class="rv-cta">
+    <div class="rv-cta-info">
+      <h3 data-i="cta_title">Пікіріңізді қалдырыңыз</h3>
+      <p data-i="cta_sub">Атыңыз, фото және пікір — бір минут.</p>
+    </div>
+    <a href="index.html#reviews">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <span data-i="cta_btn">Пікір жазу</span>
+    </a>
+  </div>
+
+  <div id="rvList" class="rv-list"></div>
+</section>
+
+<div id="lightbox" class="lb">
+  <button class="lb-close" onclick="closeLb()">✕</button>
+  <img id="lbImg" alt="">
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h4 data-i="contacts">Байланыс</h4>
+      <p><strong>Мекенжай</strong>: Құлсары, Dailizza</p>
+      <p><strong>24 / 7 / 365</strong></p>
+      <p>📞 <a href="tel:+77710552525">+7 771 055 25 25</a></p>
+    </div>
+    <div>
+      <h4>Меню</h4>
+      <p><a href="index.html#sec-doner">Донер / Батон</a></p>
+      <p><a href="index.html#sec-burger">Бургер</a></p>
+      <p><a href="index.html#sec-pizza">Пицца</a></p>
+      <p><a href="index.html#sec-hotdog">Хот-Дог</a></p>
+    </div>
+    <div>
+      <h4>Dailizza</h4>
+      <p>Балғын ингредиенттер, фирмалық соустар, шынайы дәм. 24/7.</p>
+    </div>
+  </div>
+  <div class="copy">
+    <span>© 2026 Dailizza · Құлсары</span>
+    <span>WhatsApp +7 771 055 25 25</span>
+  </div>
+</footer>
+
+<script>
+const T = {
+  kz: {
+    back:"Артқа", rev_title:"Біздің клиенттердің пікірлері",
+    rev_sub:"Шынайы пікірлер — шынайы дәм туралы. Сіз де өз пікіріңізді қалдырыңыз!",
+    rev_total:"Пікір", rev_rating:"Орташа баға", rev_open:"Ашықпыз",
+    cta_title:"Пікіріңізді қалдырыңыз", cta_sub:"Атыңыз, фото және пікір — бір минут.",
+    cta_btn:"Пікір жазу", empty:"Әзірге пікір жоқ. Бірінші болыңыз!",
+    your_review:"Сіздің пікіріңіз", published:"Жарияланған",
+  },
+  ru: {
+    back:"Назад", rev_title:"Отзывы наших клиентов",
+    rev_sub:"Настоящие отзывы — о настоящем вкусе. Оставьте и ваш отзыв!",
+    rev_total:"Отзывов", rev_rating:"Средняя оценка", rev_open:"Открыто",
+    cta_title:"Оставьте отзыв", cta_sub:"Имя, фото и текст — одна минута.",
+    cta_btn:"Написать отзыв", empty:"Пока нет отзывов. Будьте первым!",
+    your_review:"Ваш отзыв", published:"Опубликовано",
+  }
+};
+let lang = localStorage.getItem("dz_lang") || "kz";
+const t = k => (T[lang]||T.kz)[k] || k;
+
+function applyI18n(){
+  document.querySelectorAll("[data-i]").forEach(el => el.textContent = t(el.dataset.i));
+  document.querySelectorAll(".lang button").forEach(b=> b.classList.toggle("active", b.dataset.lang===lang));
+}
+document.querySelectorAll(".lang button").forEach(b=>{
+  b.onclick = ()=>{
+    lang = b.dataset.lang;
+    localStorage.setItem("dz_lang", lang);
+    applyI18n();
+    renderReviews();
+  };
+});
+
+function escapeHtml(s){
+  return (s||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+}
+
+function openLb(src){
+  document.getElementById("lbImg").src = src;
+  document.getElementById("lightbox").classList.add("show");
+}
+function closeLb(){
+  document.getElementById("lightbox").classList.remove("show");
+}
+document.getElementById("lightbox").addEventListener("click", (e)=>{
+  if(e.target.id === "lightbox") closeLb();
+});
+
+function loadLocal(){
+  return JSON.parse(localStorage.getItem("dz_reviews") || "[]");
+}
+
+async function loadPublic(){
+  // Жарияланған пікірлер (admin қосады reviews.json арқылы)
+  try{
+    const r = await fetch("reviews.json?t=" + Date.now());
+    if(!r.ok) return [];
+    const j = await r.json();
+    return (j.reviews || []).map(x=> ({...x, _published: true}));
+  } catch(e){
+    return [];
+  }
+}
+
+function renderCard(r){
+  const initial = (r.name||"?").charAt(0).toUpperCase();
+  const photos = (r.photos||[]).map(p=>`<img src="${p}" alt="" onclick="openLb('${p}')">`).join("");
+  const stars = "★★★★★";
+  const badge = r._published
+    ? `<span class="rv-badge">✓ ${t("published")}</span>`
+    : `<span class="rv-badge local">${t("your_review")}</span>`;
+  return `<div class="rv-card">
+    <div class="rv-card-head">
+      <div class="rv-avatar">${initial}</div>
+      <div class="rv-meta">
+        <div class="rv-name">${escapeHtml(r.name)}</div>
+        <div class="rv-date">${r.date || ""} · ${badge}</div>
+      </div>
+    </div>
+    <div class="rv-stars">${stars}</div>
+    <div class="rv-text">${escapeHtml(r.text)}</div>
+    ${photos ? `<div class="rv-photos">${photos}</div>` : ""}
+  </div>`;
+}
+
+async function renderReviews(){
+  const list = document.getElementById("rvList");
+  const local = loadLocal();
+  const pub = await loadPublic();
+  // Сорттау: жаңалары жоғары
+  const combined = [...pub, ...local].reverse();
+  document.getElementById("statCount").textContent = combined.length;
+
+  if(!combined.length){
+    list.innerHTML = `<div class="rv-empty"><span class="icon">💬</span>${t("empty")}</div>`;
+    return;
+  }
+  list.innerHTML = combined.map(renderCard).join("");
+}
+
+applyI18n();
+renderReviews();
+</script>
+</body>
+</html>

@@ -10,7 +10,12 @@ const saveCart = () => localStorage.setItem("dz_cart", JSON.stringify(cart));
 const $ = (s, el=document) => el.querySelector(s);
 const $$ = (s, el=document) => [...el.querySelectorAll(s)];
 const fmt = (n) => n.toLocaleString("ru-RU") + " " + t("tenge");
-const imgUrl = (name) => encodeURIComponent(name).replace(/%2F/g,"/");
+const imgUrl = (name) => {
+  // Фоны кесілген PNG-ды пайдаланамыз (clean/ папкадан)
+  if(!name) return "";
+  const base = name.replace(/\.(jpg|jpeg|png)$/i, "");
+  return "clean/" + encodeURIComponent(base + ".png").replace(/%2F/g,"/");
+};
 
 function toast(msg){
   const el = $("#toast");
