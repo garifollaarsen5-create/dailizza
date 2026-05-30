@@ -227,9 +227,15 @@ input,textarea,select{font-size:16px}
 .card-footer{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:6px}
 .price{font-weight:900;font-size:18px;color:var(--green-3)}
 
-/* Хот-дог — өте ұзын фотолар, 3:4 */
-.card[data-cat="hotdog"] .card-img{ aspect-ratio: 3/4; }
-.card[data-cat="hotdog"] .card-img img{ padding:4px; }
+/* Хот-дог, сусын — өте ұзын/тігінен фотолар, 3:4 */
+.card[data-cat="hotdog"] .card-img,
+.card[data-cat="drinks"] .card-img{ aspect-ratio: 3/4; }
+.card[data-cat="hotdog"] .card-img img,
+.card[data-cat="drinks"] .card-img img{ padding:4px; }
+
+/* Сусындар Dailizza group card — стакан тігінен */
+.group-card[data-cat="drinks"] .group-img{ aspect-ratio: 3/4; max-height: 460px; }
+.group-card[data-cat="drinks"] .group-img img{ padding:10px; }
 
 /* ===== ADD button / Counter ===== */
 .btn-add{

@@ -167,6 +167,7 @@ function renderItem(it){
 function renderGroup(g){
   const c = document.createElement("article");
   c.className = "group-card";
+  c.dataset.cat = g.cat;
   const rows = g.items.map(it=>{
     return `<div class="variant-row">
       <div class="variant-info">
