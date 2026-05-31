@@ -1,14 +1,5 @@
 // ===== Supabase баптауы =====
-// 1. https://supabase.com → "Start your project" → GitHub-пен кіріңіз
-// 2. New Project → Name: dailizza, Region: Frankfurt → Create
-// 3. Күтіңіз ~2 минут (дерекқор дайын болғанша)
-// 4. Сол жақ панель → "SQL Editor" → "New query" → SUPABASE_SETUP.sql ішіндегі SQL-ды
-//    көшіріп қойыңыз → "Run" басыңыз
-// 5. Сол жақ панель → "Project Settings" (төменгі сол жақ ⚙️) → "API"
-// 6. Төмендегі екі мәнді осы файлға қойыңыз:
-//    - "Project URL"   →  SUPABASE_URL
-//    - "anon public"   →  SUPABASE_ANON_KEY (ұзын кілт)
-// 7. Файлды сақтап, git push жасаңыз
+// Dailizza · клиенттердің отзывтары осы дерекқорда сақталады
 
-const SUPABASE_URL      = ""; // мысалы: https://abcdefgh.supabase.co
-const SUPABASE_ANON_KEY = ""; // мысалы: eyJhbGciOiJIUzI1NiIs...
+const SUPABASE_URL      = "https://tmauldymqqwscybeqtrq.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRtYXVsZHltcXF3c2N5YmVxdHJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMDg0MjQsImV4cCI6MjA5NTc4NDQyNH0.b3uW7Kbi_SnIUl_uhMoz93BChmlQV7tDVIYwYuN2-AY";
