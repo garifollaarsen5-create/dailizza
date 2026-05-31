@@ -106,22 +106,26 @@ function renderItem(it){
 
   let footerHtml = "";
   if(it.sizes && it.sizes.length){
-    // Бірнеше көлем — әр көлемнің өз бағасы
-    footerHtml = `<div class="sizes">` + it.sizes.map(s=>{
+    // Бірнеше көлем — әр қатарда жеке +/-
+    footerHtml = `<div class="sizes-list">` + it.sizes.map(s=>{
       const sid = it.id+"-"+s.label;
       const q = cartQty(sid);
-      const counter = q>0
-        ? `<div class="sz-counter">
-             <button data-dec="${sid}">−</button>
+      const ctrl = q>0
+        ? `<div class="counter">
+             <button data-dec="${sid}" aria-label="−">−</button>
              <span class="qn">${q}</span>
-             <button data-inc="${sid}">+</button>
+             <button data-inc="${sid}" aria-label="+">+</button>
            </div>`
-        : "";
-      return `<button class="size-btn" data-size="${sid}" data-base="${it.id}" data-label="${s.label}" data-price="${s.price}">
-        <span class="sz-l">${s.label}</span>
-        <span class="sz-p">${fmt(s.price)}</span>
-        ${counter}
-      </button>`;
+        : `<button class="btn-add" data-addsz="${sid}" data-base="${it.id}" data-label="${s.label}" data-price="${s.price}">
+             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+           </button>`;
+      return `<div class="size-row">
+        <div class="size-info">
+          <span class="sz-l">${s.label}</span>
+          <span class="sz-p">${fmt(s.price)}</span>
+        </div>
+        ${ctrl}
+      </div>`;
     }).join("") + `</div>`;
   } else {
     footerHtml = `<div class="card-footer">
@@ -145,12 +149,11 @@ function renderItem(it){
       addToCart({ id:it.id, img:it.img, name:it.name, price:it.price });
     }
   });
-  // Size buttons
-  c.querySelectorAll(".size-btn").forEach(btn=>{
-    btn.addEventListener("click", (e)=>{
-      // Counter (-/+) клик жасалса, оны өңдемейміз
-      if(e.target.closest(".sz-counter")) return;
-      const sid = btn.dataset.size;
+  // Size add buttons
+  c.querySelectorAll("[data-addsz]").forEach(btn=>{
+    btn.onclick = (e)=>{
+      e.stopPropagation();
+      const sid = btn.dataset.addsz;
       const label = btn.dataset.label;
       const price = +btn.dataset.price;
       const fullName = {
@@ -158,7 +161,7 @@ function renderItem(it){
         ru: it.name.ru + " · " + label
       };
       addToCart({ id:sid, img:it.img, name:fullName, price });
-    });
+    };
   });
   return c;
 }
