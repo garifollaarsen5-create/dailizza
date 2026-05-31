@@ -307,7 +307,7 @@ const MENU = [
   },
 
   // Разливной — Dailizza ыдысы
-  { type:"group", cat:"drinks", img:"drinks-dailizza.jpg",
+  { type:"group", cat:"drinks", img:"razliv-dailizza.jpg",
     title:{kz:"Разливной",ru:"Разливной"},
     items:[
       { id:"razliv-pepsi", name:{kz:"Pepsi 0,5",ru:"Pepsi 0,5"}, price:690, desc:{kz:"",ru:""}},
