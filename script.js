@@ -98,11 +98,14 @@ function counterHtml(id){
   </div>`;
 }
 
+const newBadge = '<span class="badge-new">NEW</span>';
+
 function renderItem(it){
   const c = document.createElement("article");
   c.className = "card";
   c.dataset.cat = it.cat;
   const desc = it.desc[lang];
+  const itemNew = it.isNew || (it.sizes && it.sizes.some(s=>s.isNew));
 
   let footerHtml = "";
   if(it.sizes && it.sizes.length){
@@ -123,6 +126,7 @@ function renderItem(it){
         <div class="size-info">
           <span class="sz-l">${s.label}</span>
           <span class="sz-p">${fmt(s.price)}</span>
+          ${s.isNew ? newBadge : ""}
         </div>
         ${ctrl}
       </div>`;
@@ -135,7 +139,10 @@ function renderItem(it){
   }
 
   c.innerHTML = `
-    <div class="card-img"><img src="${imgUrl(it.img)}" alt="${it.name[lang]}" loading="lazy"></div>
+    <div class="card-img">
+      ${itemNew ? '<span class="card-new">NEW</span>' : ''}
+      <img src="${imgUrl(it.img)}" alt="${it.name[lang]}" loading="lazy">
+    </div>
     <div class="card-body">
       <div class="card-title">${it.name[lang]}</div>
       <div class="card-desc">${desc || ""}</div>
@@ -170,11 +177,13 @@ function renderGroup(g){
   const c = document.createElement("article");
   c.className = "group-card";
   c.dataset.cat = g.cat;
+  const groupNew = g.items.some(it=> it.isNew);
   const rows = g.items.map(it=>{
     return `<div class="variant-row">
       <div class="variant-info">
         <div class="variant-name">
           <span>${it.name[lang]}</span>
+          ${it.isNew ? newBadge : ""}
           <span class="vprice">${fmt(it.price)}</span>
         </div>
         ${it.desc[lang] ? `<div class="variant-desc">${it.desc[lang]}</div>` : ""}
@@ -183,7 +192,10 @@ function renderGroup(g){
     </div>`;
   }).join("");
   c.innerHTML = `
-    <div class="group-img"><img src="${imgUrl(g.img)}" alt="${g.title[lang]}" loading="lazy"></div>
+    <div class="group-img">
+      ${groupNew ? '<span class="card-new">NEW</span>' : ''}
+      <img src="${imgUrl(g.img)}" alt="${g.title[lang]}" loading="lazy">
+    </div>
     <div class="group-body">
       <h3 class="group-title">${g.title[lang]}</h3>
       ${rows}
@@ -203,6 +215,7 @@ function renderList(b){
       <div class="variant-info">
         <div class="variant-name">
           <span>${it.name[lang]}</span>
+          ${it.isNew ? newBadge : ""}
           <span class="vprice">${fmt(it.price)}</span>
         </div>
         ${it.desc[lang] ? `<div class="variant-desc">${it.desc[lang]}</div>` : ""}
