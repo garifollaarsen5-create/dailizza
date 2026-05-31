@@ -228,7 +228,20 @@
         <input id="fName" type="text" required autocomplete="name" data-ph="name_ph">
       </div>
       <div class="field">
-        <label data-i="phone">WhatsApp нөмір</label>
+        <label data-i="bank_label">Қай банкпен жібересіз</label>
+        <div class="bank-toggle" id="bankToggle">
+          <button type="button" data-bank="kaspi" class="bank-kaspi active">
+            <span class="bank-dot"></span>
+            <span data-i="bank_kaspi">Kaspi</span>
+          </button>
+          <button type="button" data-bank="halyk" class="bank-halyk">
+            <span class="bank-dot"></span>
+            <span data-i="bank_halyk">Halyk</span>
+          </button>
+        </div>
+      </div>
+      <div class="field">
+        <label data-i="phone">Удаленка жіберілетін номер</label>
         <input id="fPhone" type="tel" required autocomplete="tel" inputmode="tel" data-ph="phone_ph">
       </div>
       <div class="row2">

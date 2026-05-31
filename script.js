@@ -351,6 +351,9 @@ function setDeliveryType(type){
   $("#addrField").style.display = type==="delivery" ? "flex" : "none";
   $("#fAddress").required = (type==="delivery");
 }
+function setBank(bank){
+  $$("#bankToggle button").forEach(b=> b.classList.toggle("active", b.dataset.bank===bank));
+}
 
 function sendWhatsApp(e){
   e.preventDefault();
@@ -360,6 +363,8 @@ function sendWhatsApp(e){
   const time = $("#fTime").value;
   const comment = $("#fComment").value.trim();
   const type = $("#deliveryToggle .active").dataset.type;
+  const bank = $("#bankToggle .active").dataset.bank;
+  const bankName = bank==="kaspi" ? "Kaspi" : "Halyk";
   const address = $("#fAddress").value.trim();
   if(!name || !phone || !date || !time || (type==="delivery" && !address)){
     toast(t("fill_required")); return;
@@ -377,6 +382,7 @@ function sendWhatsApp(e){
   lines.push("*"+t("msg_type")+"* "+ (type==="delivery" ? t("delivery") : t("pickup")));
   if(type==="delivery") lines.push("*"+t("msg_addr")+"* "+address);
   lines.push("*"+t("msg_name")+"* "+name);
+  lines.push("*"+t("msg_bank")+"* "+bankName);
   lines.push("*"+t("msg_phone")+"* "+phone);
   lines.push("*"+t("msg_date")+"* "+date);
   lines.push("*"+t("msg_time")+"* "+time);
@@ -572,6 +578,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
   $("#orderForm").onsubmit = sendWhatsApp;
   $$("#deliveryToggle button").forEach(b=> b.onclick = ()=> setDeliveryType(b.dataset.type));
   setDeliveryType("pickup");
+  $$("#bankToggle button").forEach(b=> b.onclick = ()=> setBank(b.dataset.bank));
+  setBank("kaspi");
 
   const today = new Date();
   const iso = today.toISOString().slice(0,10);
