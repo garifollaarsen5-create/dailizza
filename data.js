@@ -290,7 +290,7 @@ const MENU = [
 
   // ===== DRINKS =====
   // Напитки — бөтелкедегі сусындар
-  { type:"group", cat:"drinks", img:"pepsi.jpg",
+  { type:"group", cat:"drinks", img:"drinks-bottles.jpg",
     title:{kz:"Напитки",ru:"Напитки"},
     items:[
       { id:"ayran",    name:{kz:"Айран",ru:"Айран"}, price:390,
