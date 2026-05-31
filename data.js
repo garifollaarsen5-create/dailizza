@@ -175,10 +175,6 @@ const MENU = [
           ru:"Куриное филе, айсберг, помидоры, сыр, хашбраун в лепешке"}},
 
   // ===== BOWL & САЛАТ =====
-  { type:"item", cat:"bowl", img:"bowl-fri.jpg", id:"bowl-fri",
-    name:{kz:"Боул фримен",ru:"Боул с фри"}, price:1690,
-    desc:{kz:"Тауық, фри, ірімшік, көкөніс, фирмалық соус",
-          ru:"Курица, фри, сыр, овощи, фирменный соус"}},
   { type:"item", cat:"bowl", img:"bowl-rice.jpg", id:"bowl-rice",
     name:{kz:"Боул күрішпен",ru:"Боул с рисом"}, price:1690,
     desc:{kz:"Тауық, күріш, ірімшік, көкөніс, фирмалық соус",
@@ -187,6 +183,14 @@ const MENU = [
     name:{kz:"Цезарь салаты",ru:"Салат Цезарь"}, price:2490,
     desc:{kz:"Айсберг, черри қызанақ, сухарик, пармезан, тауық стрипстер",
           ru:"Айсберг, черри, сухарики, пармезан, куриные стрипсы"}},
+  { type:"list", cat:"bowl",
+    title:{kz:"Тағы",ru:"Ещё"},
+    items:[
+      { id:"bowl-fri", name:{kz:"Боул фримен",ru:"Боул с фри"}, price:1690,
+        desc:{kz:"Тауық, фри, ірімшік, көкөніс, фирмалық соус",
+              ru:"Курица, фри, сыр, овощи, фирменный соус"}},
+    ]
+  },
 
   // ===== SNACKS =====
   { type:"item", cat:"snack", img:"fri.jpg", id:"fri-150",
@@ -285,11 +289,16 @@ const MENU = [
           ru:"Булочка, говяжья сосиска, чеддер, айсберг, горчица, кетчуп, белый соус"}},
 
   // ===== DRINKS =====
-  // Pepsi — өз фотосымен, екі көлемде
-  { type:"item", cat:"drinks", img:"pepsi.jpg", id:"pepsi",
-    name:{kz:"Pepsi",ru:"Pepsi"},
-    desc:{kz:"Классикалық дәм",ru:"Классический вкус"},
-    sizes:[ {label:"0,5 л", price:690}, {label:"1 л", price:890} ] },
+  // Pepsi — өз фотосымен group card
+  { type:"group", cat:"drinks", img:"pepsi.jpg",
+    title:{kz:"Pepsi",ru:"Pepsi"},
+    items:[
+      { id:"pepsi-05", name:{kz:"0,5 л",ru:"0,5 л"}, price:690,
+        desc:{kz:"Бөтелке",ru:"Бутылка"}},
+      { id:"pepsi-1l", name:{kz:"1 л",ru:"1 л"}, price:890,
+        desc:{kz:"Шыны бөтелке",ru:"Стеклянная бутылка"}},
+    ]
+  },
 
   // Қалған сусындар — Dailizza ыдысының фотосымен group
   { type:"group", cat:"drinks", img:"drinks-dailizza.jpg",
