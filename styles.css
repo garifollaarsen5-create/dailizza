@@ -283,10 +283,10 @@ input,textarea,select{font-size:16px}
 .group-img{
   background:linear-gradient(135deg,#e8f1ea,#d6e7da);
   display:block;overflow:hidden;position:relative;
-  aspect-ratio: 1/1; min-height:240px;
+  height:100%; min-height:280px;
 }
 .group-img img{
-  width:100%;height:100%;object-fit:cover;
+  width:100%;height:100%;object-fit:cover;display:block;
 }
 .group-body{padding:18px 20px;display:flex;flex-direction:column;gap:6px}
 .group-title{font-weight:900;font-size:22px;letter-spacing:-.2px;margin:0 0 6px}
@@ -536,7 +536,7 @@ input,textarea,select{font-size:16px}
   .reviews-head h2{font-size:22px}
   .section h2{font-size:22px}
   .group-card{grid-template-columns:1fr}
-  .group-img{min-height:auto;aspect-ratio:1/1;max-height:340px}
+  .group-img{height:auto;aspect-ratio:1/1;max-height:340px;min-height:auto}
   .why-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width: 640px){
