@@ -301,7 +301,7 @@ const MENU = [
         desc:{kz:"",ru:""}},
       { id:"pepsi-05", name:{kz:"Pepsi 0,5",ru:"Pepsi 0,5"}, price:690,
         desc:{kz:"Бөтелке",ru:"Бутылка"}},
-      { id:"asu-1l",   name:{kz:"Asu су 1 л",ru:"Asu вода 1 л"}, price:500, isNew:true,
+      { id:"asu-1l",   name:{kz:"Asu су 1 л",ru:"Asu вода 1 л"}, price:690, isNew:true,
         desc:{kz:"Таза су",ru:"Питьевая вода"}},
     ]
   },
