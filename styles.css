@@ -213,7 +213,7 @@ input,textarea,select{font-size:16px}
 .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
 .card-img{
   aspect-ratio: 3/4;
-  background:#0f2417;
+  background:linear-gradient(135deg,#e8f1ea,#d6e7da);
   overflow:hidden;
   position:relative;
 }
@@ -227,7 +227,7 @@ input,textarea,select{font-size:16px}
 .price{font-weight:900;font-size:18px;color:var(--green-3)}
 
 /* Барлық group card фотолары — толық сыю (cover) */
-.group-card .group-img{ background:#0f2417; }
+.group-card .group-img{ background:linear-gradient(135deg,#e8f1ea,#d6e7da); }
 .group-card .group-img img{ object-fit:cover; padding:0; }
 
 /* ===== ADD button / Counter ===== */
@@ -281,7 +281,7 @@ input,textarea,select{font-size:16px}
   align-items:stretch;
 }
 .group-img{
-  background:#0f2417;
+  background:linear-gradient(135deg,#e8f1ea,#d6e7da);
   display:block;overflow:hidden;position:relative;
   aspect-ratio: 1/1; min-height:240px;
 }

@@ -18,7 +18,8 @@ const $$ = (s, el=document) => [...el.querySelectorAll(s)];
 const fmt = (n) => n.toLocaleString("ru-RU") + " " + t("tenge");
 const imgUrl = (name) => {
   if(!name) return "";
-  return "photos/" + encodeURIComponent(name).replace(/%2F/g,"/");
+  // Latin атаулар — encodeURI қажет емес, бірақ сақтық үшін
+  return "photos/" + encodeURI(name);
 };
 
 function toast(msg){
