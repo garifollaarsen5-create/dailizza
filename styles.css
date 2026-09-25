@@ -679,3 +679,27 @@ input,textarea,select{font-size:16px}
   .size-btn .sz-p{font-size:13px}
   .size-btn .sz-l{font-size:10px}
 }
+
+/* ===== СТОП-МЕНЮ (уақытша жоқ тағамдар) ===== */
+.stop-tag{
+  display:inline-flex; align-items:center; gap:5px;
+  padding:7px 12px; border-radius:999px;
+  background:#fdecec; color:#c0392b;
+  font-size:12px; font-weight:800; white-space:nowrap;
+  border:1px solid #f5c6c2;
+}
+.variant-row.stopped .variant-info,
+.size-row.stopped .size-info{ opacity:.45; }
+.variant-row.stopped .variant-name span:first-child{ text-decoration:line-through; }
+
+.stopped-card .card-img img,
+.stopped-card .group-img img{ filter:grayscale(1) brightness(.92); }
+.stopped-card .card-title,
+.stopped-card .group-title{ color:var(--muted); }
+
+.stop-overlay{
+  position:absolute; inset:auto 0 0 0; z-index:3;
+  background:rgba(192,57,43,.92); color:#fff;
+  text-align:center; padding:8px 10px;
+  font-size:13px; font-weight:800; letter-spacing:.3px;
+}

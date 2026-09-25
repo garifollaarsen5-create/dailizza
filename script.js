@@ -1,6 +1,7 @@
 // ===== Supabase (бар болса) =====
-let sb = null;
-if(typeof SUPABASE_URL !== "undefined" && SUPABASE_URL && typeof supabase !== "undefined"){
+// stop.js клиентті әлдеқашан құрған — соны қайта қолданамыз (екі клиент болмасын)
+let sb = (typeof sbStop !== "undefined" && sbStop) ? sbStop : null;
+if(!sb && typeof SUPABASE_URL !== "undefined" && SUPABASE_URL && typeof supabase !== "undefined"){
   sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 }
 
@@ -83,7 +84,10 @@ function renderMenu(){
 function cartQty(id){ const x = cart.find(c=> c.id===id); return x ? x.qty : 0; }
 
 // Counter or +Add button
+const stopTag = () => `<span class="stop-tag">${t("stopped")}</span>`;
+
 function counterHtml(id){
+  if(isStopped(id)) return stopTag();
   const q = cartQty(id);
   if(q===0){
     return `<button class="btn-add" data-add="${id}">
@@ -106,6 +110,9 @@ function renderItem(it){
   c.dataset.cat = it.cat;
   const desc = it.desc[lang];
   const itemNew = it.isNew || (it.sizes && it.sizes.some(s=>s.isNew));
+  const allIds = it.sizes && it.sizes.length ? it.sizes.map(s=> it.id+"-"+s.label) : [it.id];
+  const allStopped = allIds.every(isStopped);
+  if(allStopped) c.classList.add("stopped-card");
 
   let footerHtml = "";
   if(it.sizes && it.sizes.length){
@@ -113,7 +120,7 @@ function renderItem(it){
     footerHtml = `<div class="sizes-list">` + it.sizes.map(s=>{
       const sid = it.id+"-"+s.label;
       const q = cartQty(sid);
-      const ctrl = q>0
+      const ctrl = isStopped(sid) ? stopTag() : q>0
         ? `<div class="counter">
              <button data-dec="${sid}" aria-label="−">−</button>
              <span class="qn">${q}</span>
@@ -122,7 +129,7 @@ function renderItem(it){
         : `<button class="btn-add" data-addsz="${sid}" data-base="${it.id}" data-label="${s.label}" data-price="${s.price}">
              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
            </button>`;
-      return `<div class="size-row">
+      return `<div class="size-row${isStopped(sid) ? " stopped" : ""}">
         <div class="size-info">
           <span class="sz-l">${s.label}</span>
           <span class="sz-p">${fmt(s.price)}</span>
@@ -140,6 +147,7 @@ function renderItem(it){
 
   c.innerHTML = `
     <div class="card-img">
+      ${allStopped ? `<span class="stop-overlay">${t("stopped")}</span>` : ''}
       ${itemNew ? '<span class="card-new">NEW</span>' : ''}
       <img src="${imgUrl(it.img)}" alt="${it.name[lang]}" loading="lazy">
     </div>
@@ -178,8 +186,10 @@ function renderGroup(g){
   c.className = "group-card";
   c.dataset.cat = g.cat;
   const groupNew = g.items.some(it=> it.isNew);
+  const groupStopped = g.items.every(it=> isStopped(it.id));
+  if(groupStopped) c.classList.add("stopped-card");
   const rows = g.items.map(it=>{
-    return `<div class="variant-row">
+    return `<div class="variant-row${isStopped(it.id) ? " stopped" : ""}">
       <div class="variant-info">
         <div class="variant-name">
           <span>${it.name[lang]}</span>
@@ -193,6 +203,7 @@ function renderGroup(g){
   }).join("");
   c.innerHTML = `
     <div class="group-img">
+      ${groupStopped ? `<span class="stop-overlay">${t("stopped")}</span>` : ''}
       ${groupNew ? '<span class="card-new">NEW</span>' : ''}
       <img src="${imgUrl(g.img)}" alt="${g.title[lang]}" loading="lazy">
     </div>
@@ -211,7 +222,7 @@ function renderList(b){
   const c = document.createElement("article");
   c.className = "list-block";
   const rows = b.items.map(it=>{
-    return `<div class="variant-row">
+    return `<div class="variant-row${isStopped(it.id) ? " stopped" : ""}">
       <div class="variant-info">
         <div class="variant-name">
           <span>${it.name[lang]}</span>
@@ -245,6 +256,7 @@ function bindCartButtons(root, onAdd){
 
 // ===== Cart =====
 function addToCart(item){
+  if(isStopped(item.id)){ toast(t("stopped")); return; }
   const ex = cart.find(x=> x.id===item.id);
   if(ex){ ex.qty += 1; }
   else  { cart.push({ ...item, qty:1 }); }
@@ -254,6 +266,7 @@ function addToCart(item){
   toast(item.name[lang]);
 }
 function incQty(id){
+  if(isStopped(id)){ toast(t("stopped")); return; }
   const x = cart.find(c=> c.id===id);
   if(x){ x.qty += 1; saveCart(); refreshAll(); bumpFab(); }
 }
@@ -270,6 +283,18 @@ function changeQtyIdx(idx, delta){
   saveCart(); refreshAll();
 }
 function removeItem(idx){ cart.splice(idx,1); saveCart(); refreshAll(); }
+// Стопқа түсіп кеткен тағамдарды корзинадан алып тастау
+function dropStoppedFromCart(){
+  const before = cart.length;
+  cart = cart.filter(x=> !isStopped(x.id));
+  if(cart.length !== before){
+    saveCart();
+    toast(t("stop_removed"));
+    return true;
+  }
+  return false;
+}
+
 function cartTotal(){ return cart.reduce((s,x)=> s + x.price*x.qty, 0); }
 function cartCount(){ return cart.reduce((s,x)=> s + x.qty, 0); }
 
@@ -341,6 +366,7 @@ function bumpFab(){
 function openDrawer(){ $("#drawer").classList.add("open"); $("#drawerBg").classList.add("open"); document.body.style.overflow="hidden"; }
 function closeDrawer(){ $("#drawer").classList.remove("open"); $("#drawerBg").classList.remove("open"); document.body.style.overflow=""; }
 function openOrder(){
+  if(dropStoppedFromCart()){ refreshAll(); if(!cart.length) return; }
   if(!cart.length) return;
   $("#orderBg").classList.add("open"); document.body.style.overflow="hidden";
 }
@@ -357,6 +383,7 @@ function setBank(bank){
 
 function sendWhatsApp(e){
   e.preventDefault();
+  if(dropStoppedFromCart()){ refreshAll(); closeOrder(); return; }
   const name = $("#fName").value.trim();
   const phone = $("#fPhone").value.trim();
   const date = $("#fDate").value;
@@ -566,6 +593,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
   refreshCart();
   refreshFab();
   renderReviewsAsync();
+
+  // Стоп-меню: бірден жүктеу + әр минут сайын тексеру
+  loadStops().then(()=>{ dropStoppedFromCart(); refreshAll(); });
+  setInterval(async ()=>{
+    const changed = await loadStops();
+    if(changed){ dropStoppedFromCart(); refreshAll(); }
+  }, 60000);
 
   $$(".lang button").forEach(b=> b.onclick = ()=> setLang(b.dataset.lang));
   $("#openCart").onclick = openDrawer;

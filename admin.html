@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="kz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1f8a3a">
+<meta name="robots" content="noindex, nofollow">
+<title>Dailizza · Стоп-меню</title>
+<link rel="icon" href="дейлиза%20логотип.PNG">
+<link rel="apple-touch-icon" href="дейлиза%20логотип.PNG">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ===== ЛОГИН ===== -->
+<div id="loginScreen" class="login-screen">
+  <form id="loginForm" class="login-box">
+    <img src="дейлиза%20логотип.PNG" alt="Dailizza" class="login-logo">
+    <h1>Стоп-меню</h1>
+    <p class="login-sub">Тек әкімшіге</p>
+    <input id="email" type="email" placeholder="Email" autocomplete="username" required>
+    <input id="password" type="password" placeholder="Пароль" autocomplete="current-password" required>
+    <button type="submit" id="loginBtn">Кіру</button>
+    <div id="loginErr" class="login-err"></div>
+  </form>
+</div>
+
+<!-- ===== АДМИН ПАНЕЛЬ ===== -->
+<div id="app" class="app" hidden>
+  <header class="ahead">
+    <div class="ahead-in">
+      <div class="ahead-title">
+        <span class="dot"></span>
+        <div>
+          <strong>Стоп-меню</strong>
+          <span id="stopCount" class="stop-count">Стопта: 0</span>
+        </div>
+      </div>
+      <div class="ahead-act">
+        <a class="link-site" href="index.html" target="_blank">Сайт ↗</a>
+        <button id="logoutBtn" class="btn-ghost">Шығу</button>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <input id="search" type="search" placeholder="Тағам іздеу...">
+    </div>
+    <div id="cats" class="cats"></div>
+  </header>
+
+  <main id="list" class="list"></main>
+
+  <div id="toast" class="toast"></div>
+</div>
+
+<!-- ===== УАҚЫТ ТАҢДАУ ===== -->
+<div id="durBg" class="dur-bg">
+  <div class="dur-box">
+    <h3 id="durTitle">Стопқа қою</h3>
+    <p class="dur-sub">Қашанға дейін?</p>
+    <div class="dur-opts">
+      <button data-h="0">Қолмен қайта қосам</button>
+      <button data-h="1">1 сағат</button>
+      <button data-h="3">3 сағат</button>
+      <button data-h="morning">Ертең таңға дейін (09:00)</button>
+    </div>
+    <button id="durCancel" class="btn-cancel">Болдырмау</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script src="data.js"></script>
+<script src="stop.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
