@@ -35,15 +35,16 @@ alter table stop_items enable row level security;
 
 drop policy if exists "Public read stop" on stop_items;
 drop policy if exists "Auth write stop"  on stop_items;
+drop policy if exists "Owner write stop" on stop_items;
 
 -- Оқу — бәріне ашық (клиенттер сайттан көру үшін)
 create policy "Public read stop"
   on stop_items for select
   using (true);
 
--- Жазу/өшіру — тек логин жасаған әкімшіге
-create policy "Auth write stop"
+-- Жазу/өшіру — тек иесінің поштасымен кірген адамға
+create policy "Owner write stop"
   on stop_items for all
   to authenticated
-  using (true)
-  with check (true);
+  using      ((auth.jwt() ->> 'email') = 'garifollaarsen5@gmail.com')
+  with check ((auth.jwt() ->> 'email') = 'garifollaarsen5@gmail.com');

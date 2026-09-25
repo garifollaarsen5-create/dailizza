@@ -52,6 +52,39 @@ async function doLogin(e){
   }
 }
 
+// Алғашқы тіркелу — Supabase панеліне кірмей-ақ
+async function doSignup(){
+  const err = $("#loginErr");
+  const email = $("#email").value.trim();
+  const pass  = $("#password").value;
+  err.className = "login-err";
+  if(!email || pass.length < 6){
+    err.textContent = "Email жазып, парольді 6 таңбадан ұзын қылыңыз";
+    return;
+  }
+  const btn = $("#signupBtn");
+  btn.disabled = true;
+  btn.textContent = "Тіркелуде...";
+  try{
+    const { data, error } = await sbStop.auth.signUp({ email, password: pass });
+    if(error) throw error;
+    if(data.session){
+      await showApp();                 // бірден кірді
+      return;
+    }
+    err.className = "login-ok";
+    err.textContent = "Поштаңызға хат жіберілді. Сілтемені басып растаңыз да, «Кіру» басыңыз.";
+  } catch(ex){
+    err.className = "login-err";
+    err.textContent = /already/i.test(ex.message||"")
+      ? "Бұл email тіркелген — жай ғана «Кіру» басыңыз"
+      : (ex.message || "Тіркелу мүмкін болмады");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Алғаш рет кіріп тұрмын — тіркелу";
+  }
+}
+
 async function doLogout(){
   await sbStop.auth.signOut();
   location.reload();
@@ -231,6 +264,7 @@ function durationMs(kind){
 document.addEventListener("DOMContentLoaded", ()=>{
   $("#loginForm").onsubmit = doLogin;
   $("#logoutBtn").onclick = doLogout;
+  $("#signupBtn").onclick = doSignup;
   $("#search").oninput = (e)=>{ search = e.target.value; renderList(); };
 
   $$("#durBg .dur-opts button").forEach(b=>{
