@@ -25,26 +25,27 @@ create policy "Public insert"
   with check (true);
 
 -- ---------- 2. Стоп-меню ----------
-create table if not exists stop_items (
+-- Аты dz_ префиксімен: бұл жобада otdoner клиентінің stop_items кестесі бар.
+create table if not exists dz_stop_items (
   item_id    text primary key,          -- тағам id (мыс. "doner-kur")
   until      timestamptz,               -- null = қолмен қайта қосылады
   updated_at timestamptz default now()
 );
 
-alter table stop_items enable row level security;
+alter table dz_stop_items enable row level security;
 
-drop policy if exists "Public read stop" on stop_items;
-drop policy if exists "Auth write stop"  on stop_items;
-drop policy if exists "Owner write stop" on stop_items;
+drop policy if exists "Public read stop" on dz_stop_items;
+drop policy if exists "Auth write stop"  on dz_stop_items;
+drop policy if exists "Owner write stop" on dz_stop_items;
 
 -- Оқу — бәріне ашық (клиенттер сайттан көру үшін)
 create policy "Public read stop"
-  on stop_items for select
+  on dz_stop_items for select
   using (true);
 
 -- Жазу/өшіру — тек иесінің поштасымен кірген адамға
 create policy "Owner write stop"
-  on stop_items for all
+  on dz_stop_items for all
   to authenticated
   using      ((auth.jwt() ->> 'email') = 'garifollaarsen5@gmail.com')
   with check ((auth.jwt() ->> 'email') = 'garifollaarsen5@gmail.com');

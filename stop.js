@@ -2,7 +2,9 @@
 // Стопқа қойылған тағамдар Supabase "stop_items" кестесінде сақталады.
 // Бұл файлды негізгі сайт (index.html) та, админ бет (admin.html) те қолданады.
 
-const STOP_TABLE = "stop_items";
+// Ескерту: осы Supabase жобасында otdoner клиентінің "stop_items" кестесі бар.
+// Dailizza бөлек кестені қолданады — араласпауы үшін.
+const STOP_TABLE = "dz_stop_items";
 
 let sbStop = null;
 if(typeof supabase !== "undefined" && typeof SUPABASE_URL !== "undefined" && SUPABASE_URL){
