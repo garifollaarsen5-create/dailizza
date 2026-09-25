@@ -2,20 +2,14 @@
 
 Уақытша таусылған тағамды сайттан жасырмай, «Уақытша жоқ» деп белгілеу үшін.
 
-## 1. Бір рет баптау (2 қадам)
+## 1. Баптау (жасалды, 2026-09-25)
 
-### 1-қадам. Кестені жасау
-1. [supabase.com](https://supabase.com) → жобаңызға кіріңіз
-2. Сол жақтан **SQL Editor** → **New query**
-3. `SUPABASE_ALL_SETUP.sql` файлының ішіндегісін көшіріп қойып, **Run** басыңыз
+- Supabase жобасы: **stoplist** (`nfvtofnvzhdxwnfhycsj`) — бұл жобада otdoner клиентінің жүйесі де тұр, сондықтан Dailizza кестесі бөлек: **`dz_stop_items`**
+- Кестелер мен ережелер `SUPABASE_ALL_SETUP.sql` арқылы орнатылды
+- Жазу құқығы тек `garifollaarsen5@gmail.com` поштасына бекітілген (RLS)
+- Әкімші аккаунты админ беттің өз «тіркелу» батырмасы арқылы жасалды
 
-### 2-қадам. Өзіңізге логин жасау
-1. Supabase → сол жақтан **Authentication** → **Users**
-2. **Add user** → **Create new user**
-3. Email мен парольді жазыңыз (мыс. `dailizza@mail.kz`)
-4. **Auto Confirm User** белгісін қосыңыз → **Create user**
-
-Осы email/пароль — стоп-меню бетіне кіретін кілтіңіз. Ешкімге бермеңіз.
+**Қалған қадам:** Supabase → Authentication → Sign In / Providers → **Allow new users to sign up** өшіру (бөтен адам жобаға тіркелмеуі үшін).
 
 ## 2. Қолдану
 
